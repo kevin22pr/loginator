@@ -8,6 +8,7 @@ RUN yarn install
 
 COPY . .
 
+RUN npx prisma generate
 RUN yarn run build
 
 # ---- Production Stage ----
@@ -19,9 +20,10 @@ COPY package*.json ./
 RUN yarn install --only=production
 
 COPY --from=builder /app/dist ./dist
-COPY prisma ./prisma  
-COPY .env .env       
+COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
+COPY .env .env     
 
 ENV NODE_ENV=production
 
-CMD ["node", "dist/main"]
+CMD sh -c "npx prisma migrate deploy && node dist/main"
