@@ -8,7 +8,7 @@ RUN yarn install
 
 COPY . .
 RUN ls -la /app
-RUN npx prisma generate
+RUN npx prisma generate --schema=src/prisma/schema.prisma
 RUN yarn run build
 
 # ---- Production Stage ----
