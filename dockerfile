@@ -8,6 +8,7 @@ RUN yarn install
 
 COPY . .
 
+RUN ls -la /app
 RUN npx prisma generate
 RUN yarn run build
 
