@@ -26,4 +26,4 @@ COPY .env .env
 
 ENV NODE_ENV=production
 
-CMD sh -c "npx prisma migrate deploy && node dist/main"
+CMD sh -c "npx prisma migrate deploy && node ./dist/main.js"
