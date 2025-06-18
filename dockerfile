@@ -7,7 +7,7 @@ COPY package*.json ./
 RUN yarn install
 
 COPY . .
-
+COPY ./src/prisma ./prisma
 RUN ls -la /app
 RUN npx prisma generate
 RUN yarn run build
